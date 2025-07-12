@@ -26,7 +26,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         localStorage.setItem("userId", data.user._id); 
         alert("✅ Login successful!");
-        window.location.href = "profile.html";
+        //profile checking for redirection
+        const profileRes = await fetch(`http://localhost:5000/api/profile/${data.user._id}/check`);
+        if (profileRes.ok) {
+          const profileData = await profileRes.json();
+          if (profileData.profileExists) {
+            window.location.href = "Home.html";
+          } else {
+            window.location.href = "profile.html";
+          }
+        } else {
+          window.location.href = "profile.html";
+        }
       } catch (err) {
         console.error("Login error:", err);
         alert("An error occurred during login.");

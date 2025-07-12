@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   visibility: { type: String, default: "Public" },
   offeredSkills: [String],
   wantedSkills: [String],
+  isProfileComplete: { type: Boolean, default: false},
 }, {
   timestamps: true
 });

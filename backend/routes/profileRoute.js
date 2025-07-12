@@ -22,4 +22,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Check if user profile exists
+router.get("/:id/check", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ profileExists: false });
+    }
+
+    // You can customize this check to suit your profile requirements
+    const profileExists = user.gender && user.age; // Add other fields if needed
+
+    res.json({ profileExists: !!profileExists });
+  } catch (err) {
+    console.error("Error checking profile:", err);
+    res.status(500).json({ profileExists: false });
+  }
+});
 module.exports = router;
