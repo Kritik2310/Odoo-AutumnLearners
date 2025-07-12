@@ -16,8 +16,8 @@
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       cursor: url('https://cdn.custom-cursor.com/db/pointer.cur'), auto;
+      transition: all 0.3s ease-in-out;
     }
-
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -36,12 +36,29 @@
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(12px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .navbar:hover {
+      background: rgba(255, 255, 255, 0.85);
     }
 
     .highlight {
       color: #3f51b5;
     }
+    /* Dropdown animation */
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
 
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+}
     .card {
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -72,13 +89,12 @@
       padding: 5px 12px;
       margin: 3px 5px 3px 0;
       display: inline-block;
-      transition: 0.2s;
+      transition: all 0.2s ease;
     }
 
     .skill-tag:hover {
       background-color: #b2ebf2;
-      transform: scale(1.05);
-      cursor: pointer;
+      transform: scale(1.1);
     }
 
     .btn-request {
@@ -92,23 +108,22 @@
     }
 
     .btn-request:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(255, 106, 136, 0.5);
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(255, 106, 136, 0.6);
     }
 
     .profile-img {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       object-fit: cover;
-      border: 2px dashed #5b6eff;
-      padding: 2px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 3px #5b6eff;
       border-radius: 50%;
-      background: #fff;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .profile-img:hover {
-      transform: rotate(3deg) scale(1.05);
+      transform: rotate(5deg) scale(1.15);
     }
 
     .availability-badge {
@@ -122,13 +137,22 @@
     }
 
     .footer {
-      background-color: #f9f9f9;
-      padding: 20px 0;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #eee;
-      margin-top: 60px;
+  background-color: #f9f9f9;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #eee;
+  margin-top: 60px;
+  transition: background-color 0.3s;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+
+    .footer:hover {
+      background-color: #efefef;
     }
 
     .fab {
@@ -157,35 +181,118 @@
     .testimonial p {
       font-style: italic;
     }
+
+    .pagination .page-item {
+  margin: 0 4px;
+}
+
+.pagination .page-link {
+  border-radius: 12px !important;
+  padding: 8px 16px;
+  min-width: 44px;
+  text-align: center;
+  color: #1f2937; /* dark gray */
+  font-weight: 500;
+  background-color: #f1f3f9;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #1f2937; /* dark background for active */
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pagination .page-link:hover {
+  background-color: #e2e8f0; /* light gray on hover */
+  color: #1f2937;
+}
+
+.pagination .page-link:focus {
+  box-shadow: 0 0 0 2px rgba(31, 41, 55, 0.3);
+  outline: none;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #9ca3af;
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+
+    h5, h2, p, small {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .card p, .card small, .card h5 {
+      margin-bottom: 0.4rem;
+    }
   </style>
 </head>
 <body>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg px-4 py-3">
-  <a class="navbar-brand fw-bold fs-4" href="#">
-    <span class="text-danger">Skill</span><span class="highlight">Swap</span>
-  </a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navContent">
-    <div class="d-flex align-items-center gap-3">
-      <input class="form-control" style="width: 200px;" type="search" placeholder="Search skills or people...">
+  <div class="container-fluid align-items-center">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold fs-4 me-auto" href="#">
+      <span class="text-danger">Skill</span><span class="highlight">Swap</span>
+    </a>
+
+    <!-- Centered Search Box -->
+    <div class="mx-auto" style="width: 300px;">
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0 rounded-start">
+          <i class="bi bi-search text-muted"></i>
+        </span>
+        <input type="text" 
+               class="form-control border-start-0 rounded-end" 
+               placeholder="Search skills or people..." 
+               style="box-shadow: none;" />
+      </div>
+    </div>
+
+    <!-- Right-aligned Dropdown and Availability -->
+    <div class="d-flex align-items-center gap-3 ms-auto">
       <select class="form-select" style="width: 140px;">
         <option selected>Availability</option>
         <option>Weekends</option>
         <option>Evenings</option>
       </select>
-      <img src="https://api.dicebear.com/7.x/lorelei/svg?seed=Happy" width="35" class="rounded-circle" alt="Profile">
+
+      <div class="dropdown">
+        <img src="https://api.dicebear.com/7.x/lorelei/svg?seed=Happy"
+             width="35"
+             class="rounded-circle dropdown-toggle"
+             role="button"
+             id="userDropdown"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+             alt="Profile" />
+        
+        <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeInDown" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
 
 <!-- Main Section -->
 <div class="container py-5 mt-4">
-  <h2 class="text-center mb-2">Discover <span class="highlight">Amazing Skills</span></h2>
-  <p class="text-center text-muted mb-5">Connect with skilled people, learn and grow together in a fun, youthful way!</p>
+  <h2 class="text-center fw-bold mb-2">
+    Discover <span id="typed-text" class="highlight"></span>
+  </h2>
+  <p class="text-center text-muted mb-5">
+    Connect with skilled people, learn and grow together in a fun, youthful way!
+  </p>
 
   <div class="row g-4">
 
@@ -269,18 +376,31 @@
     </div>
   </div>
 
-  <!-- Pagination -->
-  <div class="text-center mt-5">
-    <nav>
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled"><a class="page-link">Previous</a></li>
-        <li class="page-item active"><a class="page-link">1</a></li>
-        <li class="page-item"><a class="page-link">2</a></li>
-        <li class="page-item"><a class="page-link">3</a></li>
-        <li class="page-item"><a class="page-link">Next</a></li>
-      </ul>
-    </nav>
-  </div>
+<!-- Pagination -->
+<div class="text-center mt-5">
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">
+          <i class="bi bi-chevron-left"></i> Previous
+        </a>
+      </li>
+      <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">
+          Next <i class="bi bi-chevron-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 <!-- Footer -->
@@ -291,6 +411,21 @@
 </footer>
 
 <!-- JS Libraries -->
+ <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Typed("#typed-text", {
+      strings: ["Amazing Skills", "Hidden Talents", "New Opportunities"],
+      typeSpeed: 60,
+      backSpeed: 35,
+      backDelay: 2000,
+      loop: true,
+      smartBackspace: true,
+      showCursor: true,
+      cursorChar: "|"
+    });
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
