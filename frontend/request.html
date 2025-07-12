@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSwap Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/request.css" />
+</head>
+<body>
+
+<div class="profile-container">
+  <div class="profile-header">
+    <div>
+      <h3 class="fw-bold mb-0">Marc Demo</h3>
+      <p class="text-muted">Location: New York, USA</p>
+    </div>
+    <div>
+      <img src="./assets/profile/boy1.png" alt="Profile Photo" class="profile-photo" />
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <h5 class="section-label">Skills Offered</h5>
+      <span class="tag">Python</span>
+      <span class="tag">Public Speaking</span>
+      <span class="tag">Singing</span>
+    </div>
+    <div class="col-md-6 mb-4">
+      <h5 class="section-label">Skills Wanted</h5>
+      <span class="tag">UI/UX Design</span>
+      <span class="tag">French</span>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h5 class="section-label">Rating and Feedback</h5>
+    <div class="feedback-box mt-2">
+      <p><strong>Alex:</strong> Great mentor! Helped me with Python basics.</p>
+      <p><strong>Sarah:</strong> Very patient and responsive.</p>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="request-btn" data-bs-toggle="modal" data-bs-target="#requestModal">Request</button>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4" style="border-radius: 20px;">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="requestModalLabel">Send Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Choose one of your offered skills</label>
+                        <select class="form-select rounded-pill">
+                            <option value="">Select Skill</option>
+                            <option>Python</option>
+                            <option>Public Speaking</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Choose one of their wanted skills</label>
+                        <select class="form-select rounded-pill">
+                            <option value="">Select Skill</option>
+                            <option>UI/UX</option>
+                            <option>French</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control rounded-4" rows="3" placeholder="Write a brief message..."></textarea>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-gradient">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

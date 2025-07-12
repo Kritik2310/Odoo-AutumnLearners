@@ -1,28 +1,72 @@
+/* General page setup */
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
 }
 
+/* Background gradient */
 .bg-gradient-custom {
   background: linear-gradient(135deg, #8f51f5, #c27ff5);
 }
 
+/* Main card */
 .auth-card {
   background: white;
   border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  max-width: 950px;       /* Wider card */
+  margin: 2rem auto;      /* Vertical spacing */
+  padding: 2rem 2.5rem;   /* Better padding inside */
+  height: auto;
 }
 
+/* Illustration */
+.auth-card img {
+  max-width: 100%;
+  max-height: 240px;       /* Reduced image height */
+  object-fit: contain;
+  padding: 1rem;
+}
+
+/* Form styling */
+form .form-control,
+form .form-select {
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+form .form-label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+/* Title */
+.auth-card h3 {
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* Submit button */
 button[type="submit"] {
   background: linear-gradient(135deg, #845ef7, #9b66ff);
   border: none;
   transition: all 0.3s ease;
+  padding: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 button[type="submit"]:hover {
   transform: scale(1.02);
 }
 
+/* Toggle text/link */
 #toggleLink {
   color: #845ef7;
   cursor: pointer;
@@ -32,6 +76,19 @@ button[type="submit"]:hover {
   text-decoration: underline;
 }
 
+/* Social login icons */
 .btn-outline-secondary i {
   font-size: 1.2rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 2rem 1rem;
+    margin: 1rem;
+  }
+
+  .auth-card img {
+    display: none;
+  }
 }
