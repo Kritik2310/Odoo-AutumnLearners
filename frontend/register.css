@@ -1,0 +1,35 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #845ef7, #c27ff5);
+}
+
+.bg-image {
+  background: radial-gradient(circle at center, #fff 30%, transparent 100%);
+}
+
+.reg-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+button[type="submit"] {
+  background: linear-gradient(135deg, #845ef7, #9b66ff);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.02);
+}
+
+.btn-outline-secondary i {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
