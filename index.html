@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Match | SkillSwap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #fdfbfb, #e1eec3, #fdfbfb, #d3cce3);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .highlight {
+      color: #3f51b5;
+    }
+
+    .container-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 80px;
+      text-align: center;
+      position: relative;
+      min-height: 500px;
+    }
+
+    #cardWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .profile-card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      padding: 30px;
+      width: 330px;
+      min-height: 400px;
+      position: absolute;
+      top: 150px;
+      transition: transform 1s ease, left 1s ease, opacity 0.8s ease;
+      opacity: 1;
+      flex: 0 0 330px;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #5b6eff;
+      margin-bottom: 15px;
+    }
+
+    .skill-tag {
+      background-color: #e0f7fa;
+      color: #00796b;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 20px;
+      padding: 5px 12px;
+      margin: 3px 4px;
+      display: inline-block;
+    }
+
+    .find-btn {
+      margin-top: 500px;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #5b6eff, #3f51b5);
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      transition: 0.3s ease;
+      z-index: 10;
+      position: relative;
+    }
+
+    .find-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #3f51b5, #283593);
+    }
+
+    .user-card.start {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .user-card.animate-left {
+      left: 0%;
+      transform: translateX(0%) scale(0.98);
+    }
+
+    .match-card {
+      left: 100%;
+      top: 150px;
+      opacity: 0;
+      transform: translateX(-50%);
+    }
+
+    .match-card.animate-in {
+      left: 65%;
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+
+    .align-center {
+      position: static !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .finding-text {
+      position: absolute;
+      left: 50%;
+      top: 250px;
+      transform: translateX(-50%);
+      font-weight: 600;
+      color: #3f51b5;
+      animation: pulse 1.5s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .profile-card {
+        position: static !important;
+        transform: none !important;
+        width: 90%;
+        margin: 20px auto;
+        opacity: 1 !important;
+      }
+
+      .finding-text {
+        top: 200px;
+      }
+
+      #cardWrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg px-4 py-3">
+  <div class="container-fluid align-items-center">
+    <a class="navbar-brand fw-bold fs-4 me-auto" href="index.html">
+      <span class="text-danger">Skill</span><span class="highlight">Swap</span>
+    </a>
+    <div class="d-flex align-items-center gap-3 ms-auto">
+      <a href="index.html" class="btn btn-outline-dark rounded-pill px-4">
+        <i class="bi bi-house-door-fill me-1"></i> Home
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container-wrapper">
+  <p class="finding-text" id="findingText" style="display: none;">🔍 Finding your match...</p>
+
+  <div id="cardWrapper">
+    <div class="profile-card user-card start" id="userCard">
+      <img src="./assets/profile/boy1.png" class="profile-img" alt="User">
+      <h4 id="userName">...</h4>
+      <p id="userLocation">📍 ...</p>
+      <div id="userSkills"></div>
+    </div>
+
+    <div class="profile-card match-card" id="matchCard">
+      <img class="profile-img" src="assets/profile/girl1.png" alt="Match">
+      <h4 id="matchName">...</h4>
+      <p id="matchLocation">📍 ...</p>
+      <p><strong>Skills:</strong></p>
+      <div class="offered-skills"></div>
+      <p class="mt-2"><strong>Wants:</strong></p>
+      <div class="wanted-skills"></div>
+      <br><br>
+      <button class="btn btn-outline-primary mt-3" id="swapBtn">Request Swap</button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-5">
+    <button class="find-btn" id="findBtn">🔍 Find Best Match</button>
+  </div>
+</div>
+
+<script>
+  let currentMatch = null;
+
+  function loadUserProfile() {
+    const user = {
+      name: "Ayush",
+      location: "Mumbai",
+      profilePhoto: "/frontend/assets/profile/boy1.png",
+      skillsOffered: ["blockchain", "iot", "figma"],
+      skillsWanted: ["next", "cloud"]
+    };
+
+    document.getElementById("userName").textContent = user.name;
+    document.getElementById("userLocation").textContent = `📍 ${user.location}`;
+    document.querySelector("#userCard img").src = user.profilePhoto;
+
+    const offered = user.skillsOffered.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+    const wanted = user.skillsWanted.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+
+    document.getElementById("userSkills").innerHTML = `
+      <p><strong>Skills:</strong></p>${offered}
+      <p class="mt-2"><strong>Wants:</strong></p>${wanted}
+    `;
+  }
+
+  function loadMatchProfile() {
+    const match = {
+      _id: "665ae0df8b89a243422c157f",
+      name: "Sara",
+      location: "Hyderabad",
+      profilePhoto: "/frontend/assets/profile/girl1.png",
+      skillsOffered: ["next", "figma", "cloud"],
+      skillsWanted: ["blockchain", "iot", "ml"]
+    };
+    currentMatch = match;
+
+    document.getElementById("matchName").textContent = match.name;
+    document.getElementById("matchLocation").textContent = `📍 ${match.location}`;
+    document.querySelector("#matchCard .profile-img").src = match.profilePhoto;
+    document.querySelector("#matchCard .profile-img").alt = match.name;
+
+    const offered = match.skillsOffered.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+    const wanted = match.skillsWanted.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+
+    document.querySelector(".offered-skills").innerHTML = offered;
+    document.querySelector(".wanted-skills").innerHTML = wanted;
+  }
+
+  function sendSwapRequest(toUserId, skillOffered, skillRequested) {
+    alert(`🎉 Simulated swap request sent to ${currentMatch.name}\nSkill Offered: ${skillOffered}\nSkill Requested: ${skillRequested}`);
+  }
+
+  const findBtn = document.getElementById('findBtn');
+  const userCard = document.getElementById('userCard');
+  const matchCard = document.getElementById('matchCard');
+  const findingText = document.getElementById('findingText');
+
+  findBtn.addEventListener('click', () => {
+    userCard.classList.remove('start');
+    userCard.classList.add('animate-left');
+    findingText.style.display = 'block';
+    findBtn.style.display = 'none';
+
+    setTimeout(() => {
+      findingText.style.display = 'none';
+      matchCard.classList.add('animate-in');
+      loadMatchProfile();
+
+      setTimeout(() => {
+        userCard.classList.remove('animate-left');
+        matchCard.classList.remove('animate-in');
+        userCard.classList.add('align-center');
+        matchCard.classList.add('align-center');
+
+        findBtn.style.display = 'inline-block';
+        findBtn.textContent = '🎉 Match Found!';
+      }, 800);
+    }, 2000);
+  });
+
+  document.getElementById("swapBtn").addEventListener("click", () => {
+    if (currentMatch) {
+      sendSwapRequest(
+        currentMatch._id,
+        currentMatch.skillsOffered[0],
+        currentMatch.skillsWanted[0]
+      );
+    }
+  });
+
+  window.addEventListener("DOMContentLoaded", loadUserProfile);
+</script>
+
+
+</body>
+</html>
