@@ -3,191 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillSwap Profile</title>
+  <title>SkillSwap Profile Card</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/request.css" />
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #f0f4ff, #e0f7fa);
-      min-height: 100vh;
-      padding-top: 80px;
+      background: #eaf6ff;
+      font-family: 'Segoe UI', sans-serif;
     }
-
-    .navbar-custom {
-      background: linear-gradient(to right, #00bcd4, #00796b);
-    }
-
-    .navbar-brand,
-    .nav-link {
-      color: white !important;
-      font-weight: 500;
-    }
-
-    .nav-link:hover {
-      text-decoration: underline;
-    }
-
     .profile-container {
       max-width: 900px;
-      margin: auto;
       background: white;
+      margin: 60px auto;
       border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
-
     .profile-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 20px;
     }
-
     .profile-photo {
       width: 100px;
       height: 100px;
-      object-fit: cover;
       border-radius: 50%;
-      border: 3px solid #00bcd4;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 4px solid #00a8b5;
     }
-
     .section-label {
       font-weight: 600;
-      color: #00796b;
+      color: #008080;
+      margin-bottom: 10px;
     }
-
     .tag {
       display: inline-block;
-      background: #e1f5fe;
-      color: #0277bd;
+      background: #d9f1ff;
+      color: #006d77;
       padding: 6px 14px;
       border-radius: 20px;
-      margin: 4px 6px 0 0;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 0.9rem;
+      margin: 4px;
     }
-
     .feedback-box {
       background: #f9f9f9;
-      padding: 15px 20px;
-      border-radius: 15px;
-      border-left: 4px solid #00acc1;
+      border-left: 4px solid #00a8b5;
+      border-radius: 12px;
+      padding: 15px;
     }
-
     .request-btn {
-      background: linear-gradient(to right, #00bcd4, #00796b);
-      border: none;
+      background: linear-gradient(45deg, #00a8b5, #007d8c);
       color: white;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 16px;
+      padding: 10px 30px;
       font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .request-btn:hover {
-      background: linear-gradient(to right, #00796b, #004d40);
-      transform: scale(1.05);
-    }
-
-    .btn-gradient {
-      background: linear-gradient(to right, #00bcd4, #00796b);
-      color: white;
-      font-weight: 600;
-      padding: 10px 22px;
-      border-radius: 30px;
       border: none;
-      transition: all 0.3s ease;
+      border-radius: 30px;
     }
-
-    .btn-gradient:hover {
-      background: linear-gradient(to right, #00796b, #004d40);
-      transform: scale(1.05);
-    }
-
-    .modal-content {
-      border-radius: 20px;
-    }
-
-    select.form-select,
-    textarea.form-control {
-      border-radius: 15px;
-    }
-
-    @media (max-width: 768px) {
+    @media(max-width: 768px){
       .profile-header {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      .profile-photo {
-        margin-top: 15px;
+        gap: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-custom fixed-top shadow">
-  <div class="container">
-    <a class="navbar-brand" href="#">SkillSwap</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon bg-light rounded"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Browse</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Messages</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Main Profile Section -->
-<div class="profile-container" data-aos="fade-up" data-aos-duration="1000">
+<div class="profile-container">
+  <!-- Header with name and photo -->
   <div class="profile-header">
     <div>
-      <h3 class="fw-bold mb-0">Marc Demo</h3>
-      <p class="text-muted">Location: New York, USA</p>
+      <h3 class="fw-bold mb-1">Marc Demo</h3>
+      <p class="text-muted mb-0">Location: New York, USA</p>
     </div>
     <div>
       <img src="./assets/profile/boy1.png" alt="Profile Photo" class="profile-photo" />
     </div>
   </div>
 
-  <hr />
+  <hr class="my-4" />
 
+  <!-- Skills Section -->
   <div class="row">
-    <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-delay="200">
+    <div class="col-md-6 mb-4">
       <h5 class="section-label">Skills Offered</h5>
       <span class="tag">Python</span>
       <span class="tag">Public Speaking</span>
       <span class="tag">Singing</span>
     </div>
-    <div class="col-md-6 mb-4" data-aos="fade-left" data-aos-delay="200">
+    <div class="col-md-6 mb-4">
       <h5 class="section-label">Skills Wanted</h5>
       <span class="tag">UI/UX Design</span>
       <span class="tag">French</span>
     </div>
   </div>
 
-  <div class="mb-4" data-aos="fade-up" data-aos-delay="300">
+  <!-- Feedback Section -->
+  <div class="mb-4">
     <h5 class="section-label">Rating and Feedback</h5>
     <div class="feedback-box mt-2">
       <p><strong>Alex:</strong> Great mentor! Helped me with Python basics.</p>
@@ -195,11 +107,12 @@
     </div>
   </div>
 
-  <div class="text-end" data-aos="zoom-in-up" data-aos-delay="400">
+  <!-- Request Button -->
+  <div class="text-end">
     <button class="request-btn" data-bs-toggle="modal" data-bs-target="#requestModal">Request</button>
   </div>
 
-  <!-- Modal -->
+  <!-- Request Modal -->
   <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content p-4" style="border-radius: 20px;">
@@ -237,12 +150,8 @@
       </div>
     </div>
   </div>
-</div>    
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
 </body>
 </html>
