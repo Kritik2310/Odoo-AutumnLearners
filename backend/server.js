@@ -6,7 +6,8 @@ require('dotenv').config();
 
 const authRoutes = require("./routes/authRoute");
 const profileRoutes = require("./routes/profileRoute");
-const adminRoutes = require("./routes/adminRoute")
+const adminRoutes = require("./routes/adminRoute");
+const swapRoutes = require("./routes/swapRoute");
 //const userRoutes = require("./routes/user");
 //const swapRoutes = require("./routes/swap");
 
@@ -24,9 +25,9 @@ app.get('/', (req, res) => res.send("Skill Swap Backend.."));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", profileRoutes);
-app.use('/api', adminRoutes);
+app.use('/api/admin', adminRoutes);
+app.use("/api/request", swapRoutes);
 //app.use("/api/user", userRoutes);
-//app.use("/api/swap", swapRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI, {
