@@ -15,7 +15,7 @@ Skill Swap Platform
 
 ---
 
-##  Features
+## Prototype Features
 - User Registration and Login
 - Profile with name, location, and profile photo with custom avatars
 - List of skills offered and skills wanted
