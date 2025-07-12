@@ -24,10 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        localStorage.setItem("userId", data.user._id); // ✅ Now user is defined
+        localStorage.setItem("userId", data.user._id); 
         alert("✅ Login successful!");
-        window.location.href = "profile.html"; // ✅ Go to profile setup page
-
+        window.location.href = "profile.html";
       } catch (err) {
         console.error("Login error:", err);
         alert("An error occurred during login.");
@@ -60,10 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        localStorage.setItem("userId", data.user._id); // Save the user ID
+        localStorage.setItem("userId", data.user._id); 
         alert("✅ Registration successful!");
-        window.location.href = "login.html"; 
-
+        window.location.href = "profile.html";
       } catch (err) {
         console.error("Registration error:", err);
         alert("An error occurred during registration.");

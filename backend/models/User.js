@@ -7,14 +7,12 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   age: Number,
   gender: String,
-
-  // Profile fields
   location: String,
-  offeredSkills: [String],
-  wantedSkills: [String],
+  profilePhoto: String,
   availability: String,
   visibility: { type: String, default: "Public" },
-  profilePhoto: String
+  offeredSkills: [String],
+  wantedSkills: [String],
 }, {
   timestamps: true
 });
