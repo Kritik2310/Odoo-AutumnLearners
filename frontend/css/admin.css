@@ -1,0 +1,64 @@
+body {
+      background: linear-gradient(to bottom right, #edf7f5, #e7f5ef);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .admin-header {
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+      padding: 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    .admin-header h2 {
+      font-weight: bold;
+      color: #34495e;
+    }
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: #ffffff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 60px 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      color: #34495e;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #e0f7f3;
+      color: #148f77;
+      font-weight: 600;
+    }
+    .main-content {
+      margin-left: 260px;
+      padding: 40px;
+    }
+    .section-title {
+      margin: 40px 0 20px;
+      color: #2c3e50;
+    }
+    .card-custom {
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+    .table th {
+      background-color: #f4fdfb;
+    }
+    .status-badge {
+      font-size: 0.75rem;
+      border-radius: 12px;
+      padding: 4px 10px;
+    }
+    .status-pending { background: #f1c40f1a; color: #f39c12; }
+    .status-accepted { background: #2ecc711a; color: #27ae60; }
+    .status-cancelled { background: #e74c3c1a; color: #e74c3c; }

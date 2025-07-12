@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   location: String,
   profilePhoto: String,
   availability: String,
+  banned: { type: Boolean, default: false },
   visibility: { type: String, default: "Public" },
   offeredSkills: [String],
   wantedSkills: [String],
