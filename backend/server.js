@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/authRoute");
+const profileRoutes = require("./routes/profileRoute");
 //const userRoutes = require("./routes/user");
 //const swapRoutes = require("./routes/swap");
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => res.send("Skill Swap Backend.."));
   .catch(err => console.log("Can't connect", err));*/
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users", profileRoutes);
 //app.use("/api/user", userRoutes);
 //app.use("/api/swap", swapRoutes);
 

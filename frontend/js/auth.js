@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("authForm");
   const registerForm = document.getElementById("registerForm");
 
+  // LOGIN FLOW
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -9,18 +10,32 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
 
-      const data = await res.json();
-      alert(data.message);
-      if (res.ok) window.location.href = "Home.html";
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Login failed");
+          return;
+        }
+
+        localStorage.setItem("userId", data.user._id); // ✅ Now user is defined
+        alert("✅ Login successful!");
+        window.location.href = "profile.html"; // ✅ Go to profile setup page
+
+      } catch (err) {
+        console.error("Login error:", err);
+        alert("An error occurred during login.");
+      }
     });
   }
 
+  // REGISTER FLOW
   if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -31,15 +46,28 @@ document.addEventListener("DOMContentLoaded", () => {
       const age = document.getElementById("age").value;
       const gender = document.getElementById("gender").value;
 
-      const res = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, age, gender }),
-      });
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password, age, gender }),
+        });
 
-      const data = await res.json();
-      alert(data.message);
-      if (res.ok) window.location.href = "login.html";
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Registration failed");
+          return;
+        }
+
+        localStorage.setItem("userId", data.user._id); // Save the user ID
+        alert("✅ Registration successful!");
+        window.location.href = "login.html"; 
+
+      } catch (err) {
+        console.error("Registration error:", err);
+        alert("An error occurred during registration.");
+      }
     });
   }
 });

@@ -1,3 +1,4 @@
+// models/User.js
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
@@ -6,6 +7,14 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   age: Number,
   gender: String,
+
+  // Profile fields
+  location: String,
+  offeredSkills: [String],
+  wantedSkills: [String],
+  availability: String,
+  visibility: { type: String, default: "Public" },
+  profilePhoto: String
 }, {
   timestamps: true
 });
