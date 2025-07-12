@@ -42,7 +42,10 @@ Skill Swap Platform
 # or
 - cd backend && node server.js
 
-## Screenshots
+## Screenshots and Demo-video
+### Link: https://youtu.be/ZYB8EJnx4qg 
+
+
 <img width="1853" height="953" alt="image" src="https://github.com/user-attachments/assets/f4c7f7e0-93e5-4e0e-a46e-0b8bdec692e3" />
 <img width="1919" height="941" alt="image" src="https://github.com/user-attachments/assets/03c85600-9583-43eb-89ad-7c95e4fa7ea0" />
 <img width="1919" height="969" alt="image" src="https://github.com/user-attachments/assets/b99201e3-3399-4078-acd2-6307ce73eaf9" />
