@@ -1,100 +1,142 @@
-// Sample data
 const requests = [
   {
-    name: "Marc Demo",
-    location: "London, UK",
-    rating: 3.9,
-    status: "pending",
-    offered: ["JavaScript", "HTML", "CSS"],
-    wanted: ["Node.js", "MongoDB"],
-    photo: "https://i.pravatar.cc/80?img=11"
+    name: 'Anya Josephine',
+    city: 'Berlin, Germany',
+    rating: 4.8,
+    offered: ['React', 'Tailwind CSS'],
+    wanted: ['Node.js'],
+    status: 'pending',
+    avatar: 'https://randomuser.me/api/portraits/women/21.jpg'
   },
   {
-    name: "Jade Smith",
-    location: "Toronto, Canada",
-    rating: 4.5,
-    status: "accepted",
-    offered: ["Python"],
-    wanted: ["UI/UX"],
-    photo: "https://i.pravatar.cc/80?img=12"
+    name: 'Leo Martins',
+    city: 'Lisbon, Portugal',
+    rating: 4.6,
+    offered: ['Vue.js', 'Firebase'],
+    wanted: ['UX Research'],
+    status: 'pending',
+    avatar: 'https://randomuser.me/api/portraits/men/31.jpg'
   },
   {
-    name: "Alex Ray",
-    location: "New York, USA",
-    rating: 4.0,
-    status: "rejected",
-    offered: ["Java"],
-    wanted: ["React"],
-    photo: "https://i.pravatar.cc/80?img=13"
-  }
+    name: 'Priya Sharma',
+    city: 'Mumbai, India',
+    rating: 4.9,
+    offered: ['Figma', 'Canva'],
+    wanted: ['HTML', 'CSS'],
+    status: 'pending',
+    avatar: 'https://randomuser.me/api/portraits/women/65.jpg'
+  },
+  {
+    name: 'Carlos Reyes',
+    city: 'Barcelona, Spain',
+    rating: 4.4,
+    offered: ['WordPress'],
+    wanted: ['JavaScript', 'SEO'],
+    status: 'pending',
+    avatar: 'https://randomuser.me/api/portraits/men/45.jpg'
+  },
+  {
+    name: 'Mia Tanaka',
+    city: 'Tokyo, Japan',
+    rating: 5.0,
+    offered: ['Illustrator', 'Branding'],
+    wanted: ['React Native'],
+    status: 'pending',
+    avatar: 'https://randomuser.me/api/portraits/women/52.jpg'
+  },
 ];
 
-// Function to create card HTML
-function createCard(req) {
+let currentIndex = 0;
+let accepted = [], rejected = [];
+
+// Renders cards in 3D layout
+function renderCard(index) {
+  const center = requests[index];
+  const left = requests[index - 1];
+  const right = requests[index + 1];
+
+  document.getElementById('centerCard').innerHTML = getCardHTML(center, true);
+  document.getElementById('leftCard').innerHTML = left ? getCardHTML(left, false) : '';
+  document.getElementById('rightCard').innerHTML = right ? getCardHTML(right, false) : '';
+}
+
+// Accept a request
+function acceptRequest() {
+  accepted.push(requests[currentIndex]);
+  requests.splice(currentIndex, 1);
+
+  if (currentIndex > 0) currentIndex--;
+  renderAccepted();
+  handlePostAction();
+}
+
+// Reject a request
+function rejectRequest() {
+  rejected.push(requests[currentIndex]);
+  requests.splice(currentIndex, 1);
+
+  if (currentIndex > 0) currentIndex--;
+  handlePostAction();
+}
+
+// What happens after accept/reject
+function handlePostAction() {
+  if (requests.length === 0) {
+    document.getElementById('centerCard').innerHTML = `<h4 class="text-success">🎉 No More Requests!</h4>`;
+    document.getElementById('leftCard').innerHTML = '';
+    document.getElementById('rightCard').innerHTML = '';
+  } else {
+    renderCard(currentIndex);
+  }
+}
+
+// Navigate
+function nextCard() {
+  if (currentIndex < requests.length - 1) {
+    currentIndex++;
+    renderCard(currentIndex);
+  }
+}
+
+function prevCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderCard(currentIndex);
+  }
+}
+
+// Generate a single card's HTML
+function getCardHTML(r, isCenter = false) {
+  if (!r) return '';
+
   return `
-    <div class="col-md-6 col-lg-4">
-      <div class="card-custom h-100">
-        <div class="d-flex align-items-center gap-3 mb-3">
-          <img src="${req.photo}" class="rounded-circle border" width="60" height="60" />
-          <div>
-            <h5 class="mb-0 fw-semibold">${req.name}</h5>
-            <small class="text-muted">${req.location}</small><br/>
-            <span class="text-warning"><i class="bi bi-star-fill"></i> ${req.rating}</span>
-          </div>
+    <div class="${isCenter ? 'text-center' : 'text-muted small'}">
+      <img src="${r.avatar}" class="rounded-circle mb-2 shadow" width="60" height="60" style="object-fit: cover;" />
+      <h5 class="mt-2">${r.name}</h5>
+      <p class="small">${r.city}</p>
+      <p class="text-warning mb-2">⭐ ${r.rating}</p>
+      <div><strong>Skills Offered:</strong> ${r.offered.map(skill => `<span class="badge-tag">${skill}</span>`).join(' ')}</div>
+      <div class="mt-2"><strong>Skills Wanted:</strong> ${r.wanted.map(skill => `<span class="badge-tag">${skill}</span>`).join(' ')}</div>
+      ${isCenter ? `
+        <div class="mt-3 d-flex justify-content-center gap-2">
+          <button class="btn btn-accept" onclick="acceptRequest()">Accept</button>
+          <button class="btn btn-reject" onclick="rejectRequest()">Reject</button>
         </div>
-
-        <div class="mb-2">
-          <strong>Skills Offered:</strong><br/>
-          ${req.offered.map(skill => `<span class="badge rounded-pill bg-light text-dark fw-normal">${skill}</span>`).join(' ')}
-        </div>
-
-        <div class="mb-3">
-          <strong>Skills Wanted:</strong><br/>
-          ${req.wanted.map(skill => `<span class="badge rounded-pill bg-light text-dark fw-normal">${skill}</span>`).join(' ')}
-        </div>
-
-        <div class="d-flex justify-content-between align-items-center mt-auto">
-          <span class="badge badge-soft-status ${getStatusClass(req.status)} text-capitalize">${req.status}</span>
-          ${req.status === "pending" ? `
-            <div class="d-flex gap-2">
-              <button class="btn btn-sm btn-success rounded-pill shadow-sm px-3">Accept</button>
-              <button class="btn btn-sm btn-danger rounded-pill shadow-sm px-3">Reject</button>
-            </div>
-          ` : ""}
-        </div>
-      </div>
+      ` : ''}
     </div>
   `;
 }
 
-// Return appropriate class based on status
-function getStatusClass(status) {
-  if (status === "pending") return "badge-pending";
-  if (status === "accepted") return "badge-accepted";
-  if (status === "rejected") return "badge-rejected";
-  return "";
+// Render accepted requests
+function renderAccepted() {
+  const section = document.getElementById("acceptedSection");
+  section.innerHTML = accepted.map(r =>
+    `<div class="status-card text-center">
+      <img src="${r.avatar}" class="rounded-circle mb-2" width="50"/>
+      <h6>${r.name}</h6>
+      <p class="small text-muted">${r.city}</p>
+    </div>`).join('');
 }
 
-// Render filtered cards
-function renderFilteredCards() {
-  const container = document.getElementById("requestContainer");
-  const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-  const selectedStatus = document.getElementById("statusFilter").value;
-
-  const filtered = requests.filter(req => {
-    const nameMatch = req.name.toLowerCase().includes(searchTerm);
-    const statusMatch = selectedStatus === "all" || req.status === selectedStatus;
-    return nameMatch && statusMatch;
-  });
-
-  container.innerHTML = filtered.length
-    ? filtered.map(createCard).join("")
-    : `<div class="text-center text-muted">No results found</div>`;
-}
-
-// Attach listeners on page load
-window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("searchInput").addEventListener("input", renderFilteredCards);
-  document.getElementById("statusFilter").addEventListener("change", renderFilteredCards);
-  renderFilteredCards(); // Initial load
-});
+// Start carousel
+renderCard(currentIndex);

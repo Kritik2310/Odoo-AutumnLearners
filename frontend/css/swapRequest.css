@@ -1,39 +1,21 @@
+/* ===== Global & Body Styling ===== */
 body {
-      font-family: 'Instrument Serif','Poppins', sans-serif;
-      overflow-x: hidden;
-      background: linear-gradient(-45deg, #fdfbfb, #e1eec3, #fdfbfb, #d3cce3);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      cursor: url('https://cdn.custom-cursor.com/db/pointer.cur'), auto;
-      transition: all 0.3s ease-in-out;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes bounce {
-      0% { transform: scale(1); }
-      30% { transform: scale(1.15); }
-      50% { transform: scale(0.95); }
-      70% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-
-.card-custom {
-  background: white;
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s;
+  font-family: 'Instrument Serif', 'Fira Mono', 'Poppins', sans-serif;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #fdfbfb, #e1eec3, #fdfbfb, #d3cce3);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  cursor: url('https://cdn.custom-cursor.com/db/pointer.cur'), auto;
+  transition: all 0.3s ease-in-out;
 }
 
-.card-custom:hover {
-  transform: translateY(-5px);
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* ===== Utility Classes ===== */
 .skill-badge {
   background-color: #e6f6f8;
   color: #0a516d;
@@ -41,41 +23,137 @@ body {
   padding: 0.3rem 0.6rem;
   border-radius: 12px;
   margin: 2px;
+  display: inline-block;
 }
 
-.status {
-  font-weight: bold;
-}
-
-.status.pending {
-  color: #f0ad4e;
-}
-
-.status.accepted {
-  color: #28a745;
-}
-
-.status.rejected {
-  color: #dc3545;
-}
-
-.request-btn {
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  border: none;
-  color: white;
+.badge-tag {
+  background-color: #e6f5f1;
+  color: #1b4b43;
+  font-size: 0.85rem;
+  padding: 5px 10px;
   border-radius: 12px;
-  padding: 0.5rem 1.2rem;
-  font-weight: 500;
+  margin: 2px;
+  display: inline-block;
+}
+
+/* ===== Card Styles ===== */
+.card,
+.carousel-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  padding: 1.5rem;
+  animation: fadeInUp 0.5s ease;
+}
+
+.card:hover,
+.carousel-card:hover {
+  transform: scale(1.02);
+}
+
+/* ===== Button Styles ===== */
+.btn-accept {
+  background: linear-gradient(to right, #28a745, #218838);
+  color: white;
+  border: none;
+  transition: 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+.btn-accept:hover {
+  background: #1e7e34;
+}
+
+.btn-reject {
+  background: linear-gradient(to right, #dc3545, #c82333);
+  color: white;
+  border: none;
+  transition: 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+.btn-reject:hover {
+  background: #bd2130;
+}
+
+/* ===== Carousel 3D Styling ===== */
+.carousel-wrapper {
+  position: relative;
+  perspective: 1200px;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.carousel-card {
+  width: 300px;
+  min-height: 300px;
+  padding: 20px;
+}
+
+.active-card {
+  transform: scale(1.1);
+  z-index: 3;
+}
+
+.side-card {
+  transform: scale(0.9);
+  opacity: 0.5;
+}
+
+.left-card {
+  transform: rotateY(25deg) scale(0.9);
+}
+
+.right-card {
+  transform: rotateY(-25deg) scale(0.9);
+}
+
+/* ===== Carousel Navigation Buttons ===== */
+.carousel-btn {
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.request-btn:hover {
-  opacity: 0.9;
+.carousel-btn:hover {
+  background: linear-gradient(45deg, #38b6ff, #2ecc71);
+  color: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
 }
 
-.profile-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
+/* ===== Status Cards (Accepted Display) ===== */
+.status-card {
+  width: 220px;
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+.status-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Entry Animation ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
