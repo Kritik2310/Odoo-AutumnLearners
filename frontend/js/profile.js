@@ -46,6 +46,7 @@ async function saveProfile() {
   }
 
   const profile = {
+    name: document.getElementById("name").value,
     location: document.getElementById("location").value,
     offeredSkills: Array.from(document.querySelectorAll('#skills-offered .tag')).map(tag => tag.textContent.trim().slice(0, -1)),
     wantedSkills: Array.from(document.querySelectorAll('#skills-wanted .tag')).map(tag => tag.textContent.trim().slice(0, -1)),
@@ -81,3 +82,51 @@ function discardProfile() {
     location.reload();
   }
 }
+//pre-filling of details
+document.addEventListener("DOMContentLoaded", async () => {
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+    alert("User not logged in.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/users/${userId}`);
+    if (!res.ok) throw new Error("Failed to fetch user data");
+    const user = await res.json();
+
+    // Pre-fill profile fields
+    document.getElementById("name").value = user.name || "";
+    document.getElementById("location").value = user.location || "";
+    document.getElementById("availability").value = user.availability || "";
+    document.getElementById("visibility").value = user.visibility || "";
+    document.getElementById("profilePhoto").src = user.profilePhoto || "assets/avatars/avatar1.png";
+    document.getElementById("navProfile").src = user.profilePhoto || "assets/avatars/avatar1.png";
+
+    // Populate skills offered
+    const offeredWrapper = document.getElementById("skills-offered");
+    if (Array.isArray(user.offeredSkills)) {
+      user.offeredSkills.forEach(skill => {
+        const span = document.createElement("span");
+        span.className = `tag ${skillColors[Math.floor(Math.random() * skillColors.length)]}`;
+        span.innerHTML = `${skill} <span class='remove' onclick='this.parentElement.remove()'>&times;</span>`;
+        offeredWrapper.appendChild(span);
+      });
+    }
+
+    // Populate skills wanted
+    const wantedWrapper = document.getElementById("skills-wanted");
+    if (Array.isArray(user.wantedSkills)) {
+      user.wantedSkills.forEach(skill => {
+        const span = document.createElement("span");
+        span.className = `tag ${skillColors[Math.floor(Math.random() * skillColors.length)]}`;
+        span.innerHTML = `${skill} <span class='remove' onclick='this.parentElement.remove()'>&times;</span>`;
+        wantedWrapper.appendChild(span);
+      });
+    }
+
+  } catch (err) {
+    console.error("Error loading profile:", err);
+    alert("❌ Couldn't load profile. Try re-logging in.");
+  }
+});

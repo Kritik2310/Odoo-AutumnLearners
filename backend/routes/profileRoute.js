@@ -20,7 +20,17 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+// Get user by ID (for profile pre-filling)
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json(user);
+  } catch (err) {
+    console.error("Error fetching user by ID:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 // Check if user profile exists
 router.get("/:id/check", async (req, res) => {
   try {
